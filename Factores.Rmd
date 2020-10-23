@@ -1,0 +1,61 @@
+---
+title: "Factores"
+author: "Jordi Vanrell"
+date: "22/10/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Factores
+
+Los factores tienen diferentes niveles que son palabras.
+
+Para definir un factor primero hay que definir un vector y transformarlo en factor por medio de factor() o as.factor().
+
+```{r}
+nombres =c("Juan","Antonio","María")
+nombres
+nombres.factor=factor(nombres)
+nombres.factor
+```
+El as.factor convierte el vector que ya tenía factores y toma esos niveles. El factor(vector, levels=...) permite especificar los niveles e incluso añadiralgunos que no aparezcan, labels permite cambiar los nombres de los niveles.
+
+Para obtener una lista de los niveles del factor levels(factor).
+
+```{r}
+gender=c("M","H","H","M")
+gender.fact=factor(gender)
+gender.fact
+gender.fact2=as.factor(gender)
+gender.fact3=factor(gender, levels=c("M","H","B"))
+gender.fact3
+gender.fact4=factor(gender,levels=c("M","H","B"),labels=c("Mujer","Hombre","Hermafrodita"))
+gender.fact4
+
+levels(gender.fact4)
+levels(gender.fact4)=c("Femenino","Masculino","Híbrido")
+
+notas=c(1,2,3,4,3,2,3,4,3,2,1,2,3,4)
+notas.factor=factor(notas)
+notas.factor
+levels(notas.factor)
+levels(notas.factor)=c("Suspendido","Suficiente","Notable","Excelente")
+levels(notas.factor)=c("Suspendido","Aprobado","Aprobado","Aprobado")
+```
+
+# Factores ordenados
+
+La función ordered(vector,levels=...) es la que convierte el vector en factor ordenado.
+
+```{r}
+notas.ordered=ordered(notas, labels=c("Sus","Suf","Not","Exc"))
+notas.ordered
+```
+
+
+
+
+

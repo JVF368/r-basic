@@ -1,0 +1,41 @@
+---
+title: "Listas en R"
+author: "Jordi Vanrell"
+date: "22/10/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Listas en R
+
+La función list(...) crea una lista en la que pueden combinarse datos de muchos tipos.
+
+Para obtener una componente concreta se usa la instrucción list$componente.
+
+También puede indicarse el objeto por su posición usando dobles corchetes: list[[i]].
+
+```{r}
+x=c(1,5,-2,6,-7)
+L=list(nombre="temperaturas",datos=x,media=mean(x),sumas=cumsum(x))
+L
+L$sumas
+L[[3]]
+3*L[[2]]
+```
+# Funciones para obtener información de una lista
+
+str(list) lista el tipo de los componentes de la list y sus valores.
+
+```{r}
+str(L)
+```
+
+names(list) sirve para acceder al nombre de los componentes.
+
+```{r}
+names(L)
+```
+

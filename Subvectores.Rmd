@@ -1,0 +1,131 @@
+---
+title: "Subvectores en R"
+author: "Jordi Vanrell"
+date: "22/10/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Los subvectores
+
+El vector [i] da la i-ésima entrada del vector.
+
+* En R los índices empiean por el 1
+
+* vector[length(vector)] nos da la última entrada del vector.
+
+* vector[a:b]: si a y b son dos números naturales nos da el subvector con las entradas del vector original que van de la posición a-ésima hasta la b-ésima.
+
+* vector [-i]: si i es un número, este subvector está formado por todas las entradas del vector originalmenos la entrada i-ésima. Si i resulta ser un vector, entonces es un vector de índices y crea un nuevo vector con las entradas del vector original cuyos índices pertenecen a i.
+
+* vector[-x]: si x es un vector (de índices) entonces este es el complementario del vector[x].
+
+## Con operadores lógicos
+
+```{r}
+v=c(14,5,6,19,32,0,8)
+v[2]
+```
+```{r}
+v[-c(3,5)]
+```
+```{r}
+v[v != 19 & v>15]
+```
+# Condicionales en R
+
+* which(x cumple condición): para obtener los índices delas entradas del vector x que satisfacen la condición dada.
+
+* which.min(x): nos da la primera posición en la que el vector x toma su valor mínimo.
+
+* which(x==min(x)): nos da las posiciones en las que el vector x toma sus valores mínimos.
+
+* which.max(x): nos da la primera posición en la que el vector x toma su valor máximo.
+
+* which(x==max(x)): nos da todas las posiciones en las que el vector x toma sus valores máximos.
+
+```{r}
+x=seq(3,50,by=3.5)
+x[3]
+x[8]
+x[length(x)]
+x[length(x)-1]
+x[-3]
+x[8:4]
+x[seq(2,length(x),by=2)]
+x[seq(1, length(x), by=2)]
+x[c(1,5,7)]
+x[x>30]
+x[x>20 & x<40]
+x[x!=3 & x !=17]
+x[x<10|x>40] #La barra representa un OR lógico.
+x[!x<10] #Esto es equivalente a que x >=10
+x[x%%2==0]
+x[x%%2==1]
+x[x>0]
+which(x>4)
+x[which(x>4)]
+which(x>2 & x<8)
+x[which(x>2 & x<8)]
+which.min(x)
+which(x==min(x))
+which(x==max(x))
+which.max(x)
+x[x>4 & x<7]
+x=c()
+x
+h=c(x,2,7)
+
+```
+
+## Condiciones boleanas
+
+```{r}
+2^pi > pi^2
+12345678%%9==0
+length(1:100)>4
+
+```
+
+
+## Los valores NA
+
+Para eludir los valores NA se debe usar el parámetro na.rm=TRUE, así:
+
+```{r}
+n=c(2,3,4,5,6,5,4,5,56,NA, NA, 3)
+mean(n, na.rm=TRUE)
+```
+```{r}
+is.na(n)
+which(is.na(n))
+x[which(is.na(n))]
+
+```
+En ocasiones loa valors NA se sustituyen por la media:
+
+```{r}
+n[is.na(n)]=mean(n, na.rm=TRUE)
+n
+```
+
+```{r}
+sum(x[!is.na(n)])
+```
+Para borrar los NA:
+
+```{r}
+na.omit(x)
+```
+Esta función también puede servir para hacer las sumas u otras operaciones obviando los NA.
+
+```{r}
+attr(n, "na.action") = NULL
+```
+
+
+
+

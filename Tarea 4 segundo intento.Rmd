@@ -1,0 +1,126 @@
+---
+title: "Ejercicios sobre LaTeX, R y Markdown"
+author: "Juan Gabriel Gomila & María Santos"
+date: "30/12/2018"
+output: pdf_document
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Instrucciones
+
+En primer lugar, debeéis reproducir este documento tal cual está. Necesitaréis instalar MiKTeX y Texmaker.
+
+A continuación de cada pregunta, tenéis que redactar vuestras respuestas de manera correcta y argumentada,
+indicando qué hacéis, por qué, etc. Si se os pide utilizar instrucciones de R, tendréis que mostrarlas todas en
+chunks.
+
+El objetivo de esta tarea es que os familiaricéis con los documentos Markdown, las fórmulas en \LaTeX y los
+chunks de R. Y, de lo más importante, que os acostumbréis a explicar lo que hacéis en cada momento.
+
+# Preguntas
+
+## Pregunta 1
+
+Realizad los siguientes productos de matrices siguiente en `R`:
+
+$$ A \cdot B$$
+$$ B \cdot A$$
+$$(A \cdot B)^t$$
+$$(B^t \cdot A)$$
+$$(A \cdot B)^{-1}$$
+$$(A^{-1} \cdot B^t)$$
+
+donde
+
+$$\begin{matrix} A=\begin{pmatrix} 1 & 2 & 3 & 4\\ 4 & 3 & 2 & 1\\ 0 & 1 & 0 & 2 \\ 3 & 0 & 4 & 0\end{pmatrix} & B=\begin{pmatrix} 4 & 3 & 2 & 1\\ 0 & 3 & 0 & 4\\ 1 & 2 & 3 & 4 \\ 0 & 1 & 0 & 2\end{pmatrix} \end{matrix}$$
+
+Finalmente, escribe haciendo uso de \LaTeX el resultado de los dos primeros productos de forma adecuada.
+
+```{r}
+#Creamos las matrices en R:
+A=rbind(c(1,2,3,4),c(4,3,2,1),c(0,1,0,2),c(3,0,4,0))
+B=rbind(c(4,3,2,1),c(0,3,0,4),c(1,2,3,4),c(0,1,0,2))
+#Así se multiplica matricialmente:
+A%*%B
+B%*%A
+#Las matrices se transponen con la functión t():
+t(A%*%B)
+t(B)%*%A
+#Para hacer la inversa de una matriz se usa la función solve():
+solve(A%*%B)
+#La última multiplicación de matrices tiene la forma:
+solve(A)%*%t(B)
+```
+**Escribimos las dos primeras soluciones en \LaTeX
+
+$$A\cdot B =\begin{pmatrix} 7 & 19 & 11 & 29\\ 18 & 26 & 14 & 26\\ 0 & 5 & 0 & 8 \\ 16 & 17 & 18 & 19\end{pmatrix}$$
+
+$$B\cdot A =\begin{pmatrix} 19 & 19 & 22 & 23\\24 & 9 & 22 & 3\\ 21 & 11 & 23 & 12 \\ 10 & 3 & 10 & 1\end{pmatrix}$$
+
+## Pregunta 2
+
+Considerad en un vector los números de vuestro DNI y llamadlo `dni`. Por ejemplo, si vuestro DNI es 54201567K, vuestro vector será
+
+$$ dni=(5,4,2,0,1,5,6,7)$$
+
+.
+
+Definid el vector en `R`.Calculad con `R` el vector `dni` al cuadrado, la raíz cuadrada del vector `dni` y, por último, la suma de todas las cifras del vector `dni`.
+
+Finalmente, escribid todos estos vectores también en \LaTeX
+
+```{r}
+#Definimos el vector dni en R:
+dni=c(4,3,1,6,8,4,2,4)
+#Para calcular el vector dni al cuadrado (dni2) se le aplica la función 
+#sapply() con una función interna que eleve los elementos del vector 
+#al cuadrado:
+dni2=sapply(dni, FUN=function(x){x^2})
+#Llamamos al vector dni2 para comprobar que está bien:
+dni2
+
+#Para calcular el vector raíz del dni (sqdni) se hace lo mismo con una función  
+#interna que aplica raíz cuadrada a cada elemento:
+sqdni=sapply(dni, FUN=function(x){sqrt(x)})
+#Llamamos al vector dni2 para comprobar que está bien:
+sqdni
+
+#Por último aplicamos la función sum() al vector dni para que sume todos los 
+#elementos:
+sum(dni)
+```
+Escribiéndolo en \LaTeX 
+
+$$ dni2=(16, 9,  1, 36, 64, 16,  4, 16)$$
+$$ sqdni=(2.000000, 1.732051, 1.000000, 2.449490, 2.828427, 2.000000, 1.414214, 2.000000)$$
+
+
+## Pregunta 3
+
+Considerad el vector de las letras de vuestro nombre y apellido. Llamadlo `name`. Por ejemplo, en mi caso sería
+
+$$nombre=(M,A,R,I,A,S,A,N,T,O,S)$$
+
+.
+
+Definid dicho vector en `R`. Calculad el subvector que solo contenga vuestro nombre. Calculad también el subvector que contenga solo vuestro apellido. Ordenadlo alfabéticamente. Cread una matriz con este vector.
+
+Redactad todos vuestros resultados y utilizad \LaTeX cuando pertoque.
+
+```{r}
+#Como es un vector d eletras las ponemos entre comillas:
+name=c("J","O","R","D","I","V","A","N","R","E","L","L")
+#Las letras del apellido se sitúan desde la posición 6. Así creamos el subvector #apellido:
+apellido=name[6:length(name)]
+#Ordenamos alfabéticamente con la función order:
+apellido_alfa=apellido[order(apellido)]
+#Y finalmente creamos la matriz:
+apellidomatrix=matrix(apellido_alfa,nrow=1)
+#Como tiene siete letras y 7 es número primo solo puede tener una fila
+#o columna.
+```
+En \LaTeX la matriz sería:
+
+$$apellidomatrix =\begin{pmatrix} A & E & L & L & N & R & V\end{pmatrix}$$
