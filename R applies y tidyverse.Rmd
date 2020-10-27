@@ -1,0 +1,31 @@
+---
+title: "R applies y tidyverse"
+author: "Jordi Vanrell"
+date: "27/10/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## Operaciones con Data Frames básico
+
+```{r}
+apply(iris[,-5],MARGIN=2,FUN=mean)
+lapply(iris,class) #aplica funciones a todas las variables del data frame.
+dim(iris) #dimensiones del data frame
+
+statistics=function(x){c(mean(x,na.rm=TRUE),sd(x,na.rm=TRUE),min(x,bar.rm=TRUE))}
+apply(iris[,-5],MARGIN=2,FUN=statistics)
+```
+
+
+
+```{r}
+rownames(iris)
+colnames(iris)
+names(iris)
+```
+
